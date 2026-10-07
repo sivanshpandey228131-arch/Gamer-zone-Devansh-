@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gamer Hub Tool</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f172a;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px 15px;
+        }
+        .header {
+            margin-bottom: 25px;
+        }
+        h1 {
+            color: #38bdf8;
+            font-size: 26px;
+            margin-bottom: 8px;
+        }
+        p {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+        .card {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 14px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+            border: 1px solid #334155;
+        }
+        h3 {
+            color: #f1f5f9;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 12px 15px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border: 1px solid #334155;
+            background: #0f172a;
+            color: #fff;
+            font-size: 15px;
+            outline: none;
+        }
+        button {
+            background: #2563eb;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            margin-top: 10px;
+            transition: 0.2s;
+        }
+        button:active {
+            background: #1d4ed8;
+            transform: scale(0.98);
+        }
+        .result-box {
+            margin-top: 12px;
+            padding: 12px;
+            background: #0f172a;
+            border-radius: 8px;
+            font-weight: bold;
+            color: #4ade80;
+            border: 1px dashed #22c55e;
+            text-align: left;
+            line-height: 1.6;
+        }
+        .name-item {
+            background: #334155;
+            padding: 10px;
+            margin-top: 8px;
+            border-radius: 6px;
+            color: #f3f4f6;
+            font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .copy-btn {
+            width: auto;
+            padding: 5px 10px;
+            margin: 0;
+            font-size: 12px;
+            background: #10b981;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>🎮 Gamer Zone Pro</h1>
+        <p>स्टाइलिश नेम और न्यू 200 Sens सेटिंग्स टूल</p>
+    </div>
+
+    <!-- टूल 1: 200 Sensitivity Generator -->
+    <div class="card">
+        <h3>🎯 Best Headshot Sens (New 200 Scale)</h3>
+        <select id="ramSelect">
+            <option value="">अपने फोन की RAM चुनें</option>
+            <option value="2gb">2 GB / 3 GB RAM</option>
+            <option value="4gb">4 GB RAM</option>
+            <option value="6gb">6 GB / 8 GB RAM</option>
+        </select>
+        <button onclick="getSensitivity()">सेंसिटिविटी देखें</button>
+        <div id="sensResult" class="result-box" style="display:none;"></div>
+    </div>
+
+    <!-- टूल 2: Stylish Name Generator -->
+    <div class="card">
+        <h3>⚡ Stylish Gamer Name Generator</h3>
+        <input type="text" id="username" placeholder="अपना नाम लिखें...">
+        <button onclick="generateNames()">स्टाइलिश नाम बनाएं</button>
+        <div id="nameResults"></div>
+    </div>
+
+    <script>
+        function getSensitivity() {
+            let ram = document.getElementById('ramSelect').value;
+            let res = document.getElementById('sensResult');
+
+            if(ram === '2gb') {
+                res.innerHTML = `
+                    📌 <b>2GB/3GB RAM (Max Speed):</b><br>
+                    • General: 200<br>
+                    • Red Dot: 195<br>
+                    • 2x Scope: 190<br>
+                    • 4x Scope: 185
+                `;
+            } else if(ram === '4gb') {
+                res.innerHTML = `
+                    📌 <b>4GB RAM (Balanced):</b><br>
+                    • General: 190<br>
+                    • Red Dot: 185<br>
+                    • 2x Scope: 180<br>
+                    • 4x Scope: 175
+                `;
+            } else if(ram === '6gb') {
+                res.innerHTML = `
+                    📌 <b>6GB/8GB RAM (Smooth Control):</b><br>
+                    • General: 180<br>
+                    • Red Dot: 175<br>
+                    • 2x Scope: 170<br>
+                    • 4x Scope: 165
+                `;
+            } else {
+                alert('कृपया अपने मोबाइल की RAM सेलेक्ट करें!');
+                return;
+            }
+            res.style.display = 'block';
+        }
+
+        function generateNames() {
+            let name = document.getElementById('username').value.trim();
+            if(!name) { 
+                alert('कृपया अपना नाम लिखें!'); 
+                return; 
+            }
+            
+            let results = document.getElementById('nameResults');
+            let styles = [
+                `꧁༺ ${name} ༻꧂`,
+                `☠️ ${name} ☠️`,
+                `⚡ ${name} ⚡`,
+                `👑 𝒀𝑶𝑼_${name} 👑`,
+                `🔥 ${name}_𝔽𝔽 🔥`
+            ];
+
+            let htmlContent = '';
+            styles.forEach(styledName => {
+                htmlContent += `
+                    <div class="name-item">
+                        <span>${styledName}</span>
+                    </div>
+                `;
+            });
+
+            results.innerHTML = htmlContent;
+        }
+    </script>
+</body>
+  </html>
+  
